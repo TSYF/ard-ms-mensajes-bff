@@ -120,14 +120,13 @@ router.get(
             `${MESSAGE_ENDPOINT}${req.params.id}/`
         ).then(response => response.json())
         .then(message => {
-                    const CODE = 200;
-                    const response = new CommonResponseBody(
-                        true,
-                        CODE,
-                        message
-                    )
-                    res.status(CODE).send(response);
-                res.status(200).send(message);
+            const CODE = 200;
+            const response = new CommonResponseBody(
+                true,
+                CODE,
+                message
+            )
+            res.status(CODE).send(response);
         }).catch(err => {
             const CODE = 500;
     
