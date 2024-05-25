@@ -1,0 +1,95 @@
+openapi: 3.0.3
+info:
+  title: Productos
+  description: API de Productos para AR Repuestos
+  version: 1.0.0
+servers:
+  - url: http://localhost:8000/
+paths:
+  /api/product/:
+    get:
+      description: ''
+      responses:
+        default:
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonResponse'
+    post:
+      description: ''
+      responses:
+        default:
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonResponse'
+  /api/product/{id}:
+    get:
+      description: ''
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonResponse'
+  /api/product/list/{ids}:
+    get:
+      description: ''
+      parameters:
+        - name: ids
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonResponse'
+  /api/category/:
+      get:
+        description: ""
+        responses:
+          default:
+            description: ''
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/CommonResponse'
+      post:
+        description: ""
+        responses:
+          default:
+            description: ""
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/CommonResponse'
+components:
+  schemas:
+    CommonResponse:
+      type: object
+      properties:
+        ok:
+          type: boolean
+          example: true
+        code:
+          type: number
+          example: 200
+        data:
+          type: object
+          properties: {}
+        status:
+          type: string
+          example: success
