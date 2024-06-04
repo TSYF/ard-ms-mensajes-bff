@@ -321,6 +321,166 @@ router.post(
     }
 )
 
+//* Update
+router.put(
+    "/:id",
+    (req, res) => {
+        /* #swagger.responses[200] = {
+                content: {
+                    "application/json": {
+                        ok: false,
+                        code: 200,
+                        data: {
+                            
+                        }
+                    }
+                }
+            }
+        */
+        /* #swagger.responses[500] = {
+            content: {
+                "application/json": {
+                    ok: false,
+                    code: 500,
+                    data: {
+                        message: "¡Ha ocurrido un problema inesperado!"
+                    } 
+                }
+            }
+          }
+        */
+        fetch(
+            `${MESSAGE_ENDPOINT}${req.params.id}/`,
+            {
+                method: "PUT",
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(req.body)
+            }
+        ).then(response => (console.log(response), response.json()))
+        .then(message => {
+            if (matches(message, messageMatcher)) {
+                const response = new CommonResponseBody(
+                    true,
+                    200,
+                    message
+                )
+                res.status(200).send(response);
+            } else {
+                const CODE = 500;
+                const error: ErrorBody = {
+                    private: "El mensaje retornado no pasa el typecheck en Update",
+                    public: new CommonResponseBody(
+                        false,
+                        CODE,
+                        {
+                            message: "¡Ha ocurrido un problema inesperado!"
+                        }
+                    )
+                }
+                console.log(message);
+                console.log(error.private);
+                res.status(CODE).send(error.public);
+            }
+        }).catch(err => {
+            const CODE = 500;
+
+            const error: ErrorBody = {
+                private: "Error inesperado en llamado fetch en Update",
+                public: new CommonResponseBody(
+                    false,
+                    CODE,
+                    {
+                        message: "¡Ha ocurrido un problema inesperado!"
+                    }
+                ),
+                errorObject: err
+            }
+            console.log(error.private);
+            console.error(error.errorObject)
+            res.status(CODE).send(error.public);
+        })
+    }
+)
+
+//* Delete
+router.delete(
+    "/:id",
+    (req, res) => {
+        /* #swagger.responses[200] = {
+                content: {
+                    "application/json": {
+                        ok: false,
+                        code: 200,
+                        data: {
+                            
+                        }
+                    }
+                }
+            }
+        */
+        /* #swagger.responses[500] = {
+            content: {
+                "application/json": {
+                    ok: false,
+                    code: 500,
+                    data: {
+                        message: "¡Ha ocurrido un problema inesperado!"
+                    } 
+                }
+            }
+          }
+        */
+        fetch(
+            `${MESSAGE_ENDPOINT}${req.params.id}/`,
+            {
+                method: "DELETE"
+            }
+        ).then(response => (console.log(response), response.json()))
+        .then(message => {
+            if (matches(message, messageMatcher)) {
+                const response = new CommonResponseBody(
+                    true,
+                    200,
+                    message
+                )
+                res.status(200).send(response);
+            } else {
+                const CODE = 500;
+                const error: ErrorBody = {
+                    private: "El mensaje retornado no pasa el typecheck en Delete",
+                    public: new CommonResponseBody(
+                        false,
+                        CODE,
+                        {
+                            message: "¡Ha ocurrido un problema inesperado!"
+                        }
+                    )
+                }
+                console.log(message);
+                console.log(error.private);
+                res.status(CODE).send(error.public);
+            }
+        }).catch(err => {
+            const CODE = 500;
+
+            const error: ErrorBody = {
+                private: "Error inesperado en llamado fetch en Delete",
+                public: new CommonResponseBody(
+                    false,
+                    CODE,
+                    {
+                        message: "¡Ha ocurrido un problema inesperado!"
+                    }
+                ),
+                errorObject: err
+            }
+            console.log(error.private);
+            console.error(error.errorObject)
+            res.status(CODE).send(error.public);
+        })
+    }
+)
+
 
 module.exports = router;
 export default router;
