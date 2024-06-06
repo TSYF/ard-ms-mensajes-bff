@@ -2,3 +2,5 @@ openapi-contract.json
 .env
 pnpm-lock.yaml
 node_modules
+logs
+ecosystem.config.js
