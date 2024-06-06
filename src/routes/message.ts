@@ -249,25 +249,6 @@ router.post(
         */
         const message: Message & RequestBody = req.body;
 
-        if (!matches(message, messageMatcher)) {
-            const CODE = 422;
-            
-            const error: ErrorBody = {
-                private: "Error inesperado en llamado fetch en Store",
-                public: new CommonResponseBody(
-                    false,
-                    CODE,
-                    {
-                        message: "La forma del cuerpo no coincide con la forma de Message"
-                    }
-                )
-            }
-            console.log(error.private);
-            console.error(error.errorObject)
-            res.status(CODE).send(error.public);
-            return;
-        }
-        
         fetch(
             MESSAGE_ENDPOINT,
             {
